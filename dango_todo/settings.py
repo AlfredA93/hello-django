@@ -28,11 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY','')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.path.isfile("env.py"):
-    DEBUG = True
-else:
-    DEBUG = False
-
+# if os.path.isfile("env.py"):
+#     DEBUG = True
+# else:
+#     DEBUG = False
+DEBUG = True
 
 if os.path.isfile("env.py"):
     import env
