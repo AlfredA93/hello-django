@@ -34,8 +34,10 @@ else:
     DEBUG = False
 
 
-if development is True:
-    ALLOWED_HOSTS = ['127.0.0.1']
+if os.path.isfile("env.py"):
+    import env
+    if development is True:
+        ALLOWED_HOSTS = ['127.0.0.1']
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOST_NAME')]
 
@@ -86,13 +88,15 @@ WSGI_APPLICATION = 'dango_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if development:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+if os.path.isfile("env.py"):
+    import env
+    if development:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
         }
-    }
 else:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
